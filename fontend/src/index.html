@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Loadcell Dashboard</title>
+  <style>
+    :root{ --bg:#0b1020; --fg:#e8eefc; --muted:#9db1d9; }
+    *{ box-sizing: border-box }
+    body{ margin:0; font-family: ui-sans-serif,system-ui,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--fg) }
+    header{ padding:14px 18px; border-bottom:1px solid #1e2746; display:flex; gap:12px; align-items:center }
+    h1{ margin:0; font-size:18px }
+    .chip{ padding:2px 8px; border:1px solid #2b3763; border-radius:999px; color:#cfe1ff; font-size:12px }
+    .wrap{ display:grid; grid-template-columns:2fr 1fr; gap:16px; padding:16px }
+    .card{ background:#0f1730; border:1px solid #1e2746; border-radius:16px; padding:12px; box-shadow:0 4px 20px rgba(0,0,0,.2) }
+    .video-wrap{ position:relative; border-radius:12px; overflow:hidden }
+    video{ width:100%; display:block; background:#000 }
+    canvas.overlay{ position:absolute; inset:0; pointer-events:none }
+    table{ width:100%; border-collapse: collapse }
+    th,td{ border-bottom:1px solid #1e2746; padding:8px 10px; text-align:left; font-size:14px }
+    th{ color:var(--muted) }
+    .row{ display:flex; gap:8px; align-items:center; margin-top:8px }
+    .btn{ cursor:pointer; border:1px solid #2b3763; background:#0c1530; color:#cfe1ff; border-radius:10px; padding:6px 10px }
+    .btn:hover{ background:#122044 }
+    .muted{ color:var(--muted); font-size:12px }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Load Cell + IP Camera</h1>
+    <span class="chip" id="camTitle">Camera</span>
+    <span class="muted">Realtime từ TTN MQTT</span>
+  </header>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="video-wrap">
+        <video id="video" autoplay muted playsinline></video>
+        <canvas class="overlay" id="overlay"></canvas>
+      </div>
+      <div class="row">
+        <button class="btn" id="btnTare">Tare/Zero (node đang chọn)</button>
+        <span class="muted">Chọn node ở bảng để gửi tare</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:6px 4px 12px">Thiết bị & tải</h3>
+      <table id="tbl">
+        <thead><tr>
+          <th>Device</th><th>Weights</th><th>RSSI</th><th>SNR</th><th>Pin</th><th>Cập nhật</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Socket.io do server cung cấp: -->
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- HLS player -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <!-- App JS -->
+  <script src="/src/app.js"></script>
+</body>
+</html>
