@@ -1,0 +1,17 @@
+{
+    "camera": {
+      "title": "Khu vực cân A",
+      "stream": "/hls/stream.m3u8",
+      "lowLatency": true
+    },
+    "thresholds": { "ok": 5, "warn": 20 },
+    "devices": {
+      "node01": [
+        { "label": "LC-1", "x": 0.22, "y": 0.35 },
+        { "label": "LC-2", "x": 0.78, "y": 0.35 },
+        { "label": "LC-3", "x": 0.22, "y": 0.75 },
+        { "label": "LC-4", "x": 0.78, "y": 0.75 }
+      ]
+    }
+  }
+  
